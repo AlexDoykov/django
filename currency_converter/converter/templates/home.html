@@ -9,18 +9,24 @@
 <p>This is a paragraph.</p>
  <table style="width:100%">
   <tr>
-    <th>From</th>
-    <th>To</th>
+    <th>Currency</th>
+    <th>ISO</th>
     <th>Exchange Rate</th>
   </tr>
-  {% for currency in currency_rate%}
+  {% for currency in all_currencies%}
   <tr>
-    <th>{{ currency.from_currency}}</th>
-    <th>{{ currency.to_currency}}</th>
+    <th>{{ currency.name}}</th>
+    <th>{{ currency.iso_code}}</th>
     <th>{{ currency.exchange_rate}}</th>
   </tr>
 {% endfor %}
 </table> 
+
+<form action="/" method="post">
+    {% csrf_token %}
+    {{ exchange_form }}
+    <input type="submit" value="Submit">
+</form>
 
 </body>
 </html> 

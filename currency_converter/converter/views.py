@@ -1,12 +1,27 @@
 from django.shortcuts import render
-from .models import Currency, ExchangeRate
+from .models import Currency
+from .forms import ExchangeForm
+from django.http import HttpResponseRedirect
+
+
+def process_exchange_form():
+    pass
 
 
 def index(request):
-    data = ExchangeRate.objects.all()
+    if request.method == 'POST':
+        form = ExchangeForm(request.POST)
+        if form.is_valid():
+            process_exchange_form()
+            return HttpResponseRedirect("")
+    else:
+        form = ExchangeForm()
 
-    currency_rate = {
-        "currency_rate": data
+    currencies = Currency.objects.all().order_by("name")
+
+    template_data = {
+        "exchange_form": form,
+        "all_currencies": currencies,
     }
 
-    return render(request, 'home.html', currency_rate)
+    return render(request, 'home.html', template_data)
