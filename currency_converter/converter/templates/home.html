@@ -1,0 +1,26 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+ <table style="width:100%">
+  <tr>
+    <th>From</th>
+    <th>To</th>
+    <th>Exchange Rate</th>
+  </tr>
+  {% for currency in currency_rate%}
+  <tr>
+    <th>{{ currency.from_currency}}</th>
+    <th>{{ currency.to_currency}}</th>
+    <th>{{ currency.exchange_rate}}</th>
+  </tr>
+{% endfor %}
+</table> 
+
+</body>
+</html> 
