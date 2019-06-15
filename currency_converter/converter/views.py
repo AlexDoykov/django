@@ -9,6 +9,8 @@ def process_exchange_form():
 
 
 def index(request):
+    currencies = Currency.objects.all().order_by("name")
+
     if request.method == 'POST':
         form = ExchangeForm(request.POST)
         if form.is_valid():
@@ -16,8 +18,6 @@ def index(request):
             return HttpResponseRedirect("")
     else:
         form = ExchangeForm()
-
-    currencies = Currency.objects.all().order_by("name")
 
     template_data = {
         "exchange_form": form,
