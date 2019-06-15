@@ -5,6 +5,7 @@ from .models import Currency
 class ExchangeForm(forms.Form):
     value = forms.DecimalField()
     currency = forms.ChoiceField(choices=[(c.id, c.name) for c in Currency.objects.all().order_by("name")])
+    converted_value = forms.DecimalField(disabled=True, required=False)
 
    # def __init__(self, *args, **kwargs):
    #     super(ExchangeForm, self).__init__(*args, **kwargs)
