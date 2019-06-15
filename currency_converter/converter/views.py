@@ -1,20 +1,33 @@
 from django.shortcuts import render
 from .models import Currency
 from .forms import ExchangeForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from decimal import Decimal
+import json
 
 
-def process_exchange_form(cleared_form):
-    currency_object = Currency.objects.get(id=cleared_form['currency'])
-    exchange_rate = currency_object.exchange_rate
-    value = cleared_form['value']
-    form_values = {
-            'converted_value': exchange_rate * Decimal(value),
+def exchange_currency(request):
+    if request.method == 'POST':
+        value = request.POST.get('value')
+        currency = request.POST.get('currency')
+
+        currency_object = Currency.objects.get(id=currency)
+        exchange_rate = currency_object.exchange_rate
+        form_values = {
+            'converted_value': float(exchange_rate * Decimal(value)),
             'value': value,
-            'currency': cleared_form['currency']
+            'currency': currency,
             }
-    return ExchangeForm(initial=form_values)
+
+        return HttpResponse(
+            json.dumps(form_values),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
 
 
 def index(request):
@@ -24,12 +37,11 @@ def index(request):
         "all_currencies": currencies,
     }
 
-    if request.method == 'POST':
-        form = ExchangeForm(request.POST)
-        if form.is_valid():
-            form = process_exchange_form(form.cleaned_data)
-    else:
-        form = ExchangeForm()
-    template_data["exchange_form"] = form
+    # if request.method == 'POST':
+    #     form = ExchangeForm(request.POST)
+    #     if form.is_valid():
+    #         form = process_exchange_form(form.cleaned_data)
+    # else:
+    template_data["exchange_form"] = ExchangeForm()
 
     return render(request, 'home.html', template_data)

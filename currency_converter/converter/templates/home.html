@@ -19,11 +19,15 @@
 {% endfor %}
 </table> 
 
-<form action="/" method="post">
+<form method="post" id="post-form">
     {% csrf_token %}
-    {{ exchange_form }}
+    <div class="fieldWrapper" id="the_post">
+        {{ exchange_form }}
+    </div>
+    <div id="results"></div> <!-- errors go here -->
     <input type="submit" value="Submit">
 </form>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="static/scripts/main.js"></script>
 </body>
-
 </html> 
