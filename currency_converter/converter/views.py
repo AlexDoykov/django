@@ -10,7 +10,7 @@ def exchange_currency(request):
     if request.method == 'POST':
         value = request.POST.get('value')
         currency = request.POST.get('currency')
-
+        print(currency)
         currency_object = Currency.objects.get(id=currency)
         exchange_rate = currency_object.exchange_rate
         form_values = {
@@ -37,11 +37,7 @@ def index(request):
         "all_currencies": currencies,
     }
 
-    # if request.method == 'POST':
-    #     form = ExchangeForm(request.POST)
-    #     if form.is_valid():
-    #         form = process_exchange_form(form.cleaned_data)
-    # else:
+    print("HERE")
     template_data["exchange_form"] = ExchangeForm()
 
     return render(request, 'home.html', template_data)
