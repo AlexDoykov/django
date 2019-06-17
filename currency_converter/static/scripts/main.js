@@ -3,15 +3,18 @@ function create_post() {
     $.ajax({
         url : "exchange_currency/", // the endpoint
         type : "POST", // http method
-        data : { value: $('#value').val(), currency: $('#currency').val() }, // data sent with the post request
+        data : {
+            value: $('#value').val(),
+            currency_from: $('#currency_from').val(),
+            currency_to: $('#currency_to').val() 
+        }, // data sent with the post request
 
         // handle a successful response
         success : function(json) {
             $('#value').val(json['value']); // remove the value from the input
-            $('#currency').val(json['currency'])
+            $('#currency_from').val(json['currency_from'])
+            $('#currency_to').val(json['currency_to'])
             $('#converted_value').val(json['converted_value'])
-            console.log(json); // log the returned json to the console
-            console.log("success"); // another sanity check
         },
 
         // handle a non-successful response

@@ -9,14 +9,15 @@ import json
 def exchange_currency(request):
     if request.method == 'POST':
         value = request.POST.get('value')
-        currency = request.POST.get('currency')
-        print(currency)
-        currency_object = Currency.objects.get(id=currency)
+        currency_from = request.POST.get('currency_from')
+        currency_to = request.POST.get('currency_to')
+        currency_object = Currency.objects.get(id=currency_from)
         exchange_rate = currency_object.exchange_rate
         form_values = {
             'converted_value': float(exchange_rate * Decimal(value)),
             'value': value,
-            'currency': currency,
+            'currency_from': currency_from,
+            'currency_to': currency_to,
             }
 
         return HttpResponse(
@@ -37,7 +38,6 @@ def index(request):
         "all_currencies": currencies,
     }
 
-    print("HERE")
     template_data["exchange_form"] = ExchangeForm()
 
     return render(request, 'home.html', template_data)
