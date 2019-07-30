@@ -17,9 +17,9 @@ class Currency(models.Model):
             count_by_name,
             count_by_iso_code
             ):
-        if(count_by_name > 0 and count_by_iso_code > 0):
+        if count_by_name > 0 and count_by_iso_code > 0:
             db_currency = Currency.objects.get(name=name)
-        if(count_by_name > 0 and count_by_iso_code == 0):
+        if count_by_name > 0 and count_by_iso_code == 0:
             db_currency = Currency.objects.get(name=name)
             db_currency.iso_code = iso_code
         else:
@@ -43,7 +43,7 @@ class Currency(models.Model):
         count_by_iso_code = Currency\
             .objects.filter(iso_code=iso_code).count()
 
-        if(count_by_name > 0 or count_by_iso_code > 0):
+        if count_by_name > 0 or count_by_iso_code > 0:
             Currency.update(
                     name,
                     iso_code,
