@@ -5,12 +5,13 @@ from django.core.validators import MinValueValidator
 
 
 class ExchangeForm(forms.Form):
-    currency_from = forms.ChoiceField(label='Валута от')
-    currency_to = forms.CharField(
-            max_length=4,
-            label='Валута в',
-            initial="Лева",
-            disabled=True
+    currency_from = forms.ModelChoiceField(
+        label="Валута от",
+        queryset=Currency.objects.all()
+        )
+    currency_to = forms.ModelChoiceField(
+            label="Валута в",
+            queryset=Currency.objects.all()
             )
     value = forms.DecimalField(
             validators=[MinValueValidator(Decimal('0.00'))],
@@ -26,7 +27,7 @@ class ExchangeForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["currency_from"].choices = [
-                (c.id, c.name)
-                for c in Currency.objects.all().order_by("name")
-                ]
+
+    def calculate_rate(self):
+        print(self.currency_from)
+        print(self.currency_to)

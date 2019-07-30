@@ -11,7 +11,7 @@
     <th>Код</th>
     <th>Лева</th>
   </tr>
-  {% for currency in all_currencies%}
+  {% for currency in currencies%}
   <tr>
     <th>{{ currency.name}}</th>
     <th>{{ currency.iso_code}}</th>
@@ -23,9 +23,9 @@
 <form method="post" id="post-form" >
     {% csrf_token %}
     <div class="fieldWrapper" id="the_post">
-        {{ exchange_form|crispy }}
+        {{ form.as_p}}
     </div>
-    <div id="results"></div> <!-- errors go here -->
+    <div id="results"></div> 
     <input type="submit" class="btn btn-info" value="Submit">
 </form>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

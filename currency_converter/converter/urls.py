@@ -1,11 +1,12 @@
 from django.urls import path
-from . import views
+from .views import IndexView, exchange_currency
+
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', IndexView.as_view()),
     path(
-        'exchange_currency/',
-        views.exchange_currency,
+        "exchange_currency/",
+        exchange_currency,
         name="exchange_currency"
         )
 ]
