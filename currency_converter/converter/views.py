@@ -28,3 +28,12 @@ class ExcahngeView(View):
             )
         else:
             print("OOOOPPPSSSSS")
+
+
+class ExchangeFormView(FormView):
+    form_class = ExchangeForm
+
+    success_url = "/"
+    def form_valid(self, form):
+        print("HEREEEEE")
+        return super(ExchangeFormView, self).form_valid(form)
