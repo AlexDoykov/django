@@ -6,7 +6,8 @@ function create_post() {
         data : {
             value: $('#value').val(),
             currency_from: $('#currency_from').val(),
-            currency_to: $('#currency_to').val() 
+            currency_to: $('#currency_to').val(),
+            converted_value: $('#converted_value').val()
         }, // data sent with the post request
 
         // handle a successful response

@@ -3,7 +3,7 @@ from django.views.generic import ListView, FormView
 from .models import Currency
 from .forms import ExchangeForm
 from django.http import HttpResponse
-from decimal import Decimal
+# from decimal import Decimal
 import json
 
 
@@ -21,12 +21,13 @@ class IndexView(ListView, FormView):
         # It should return an HttpResponse.
         return super().form_valid(form)
 
+
 def exchange_currency(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ExchangeForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             form.calculate_rate()
-        
+
     else:
         return HttpResponse(
             json.dumps({"nothing to see": "this isn't happening"}),

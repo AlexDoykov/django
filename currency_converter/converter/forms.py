@@ -25,9 +25,8 @@ class ExchangeForm(forms.Form):
     currency_to.widget.attrs.update({'id': 'currency_to'})
     converted_value.widget.attrs.update({'id': 'converted_value'})
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
     def calculate_rate(self):
-        print(self.currency_from)
-        print(self.currency_to)
+        currency_from_rate = self.cleaned_data["currency_from"].exchange_rate
+        currency_to_rate = self.cleaned_data["currency_to"].exchange_rate
+        value = self.cleaned_data["value"]
+        currency_from_converted_to_levs = currency_from_rate * value
