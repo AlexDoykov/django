@@ -1,5 +1,5 @@
 function create_post() {
-    console.log("create post is working!") // sanity check
+    console.log("exchange currency is working!") // sanity check
     $.ajax({
         url : "exchange_currency/", // the endpoint
         type : "POST", // http method
@@ -12,10 +12,12 @@ function create_post() {
 
         // handle a successful response
         success : function(json) {
-            $('#value').val(json['value']); // remove the value from the input
+            console.log("success") // sanity check
+            console.log(json["value"])
+           /*  $('#value').val(json['value']); // remove the value from the input
             $('#currency_from').val(json['currency_from'])
             $('#currency_to').val(json['currency_to'])
-            $('#converted_value').val(json['converted_value'])
+            $('#converted_value').val(json['converted_value']) */
         },
 
         // handle a non-successful response
@@ -27,11 +29,11 @@ function create_post() {
     });
 };
 
-$('#post-form').on('submit', function(event){
+/* $('#exchange-form').on('submit', function(event){
     event.preventDefault();
     create_post();
-});
-
+}); */
+ 
 
 
 $(function() {

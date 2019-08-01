@@ -20,7 +20,7 @@
 {% endfor %}
 </table> 
 
-<form method="post" id="post-form" >
+<form method="post" id="exchange-form" action="exchange_currency/" method="POST">
     {% csrf_token %}
     <div class="fieldWrapper" id="the_post">
         {{ form.as_p}}

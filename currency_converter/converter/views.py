@@ -7,6 +7,8 @@ from django.http import HttpResponse
 import json
 
 
+# solution one
+
 class IndexView(ListView, FormView):
     template_name = "home.html"
     model = Currency
@@ -25,15 +27,43 @@ class ExcahngeView(View):
             return HttpResponse(
                 json.dumps(response),
                 content_type="application/json"
-            )
-        else:
-            print("OOOOPPPSSSSS")
+                )
 
+
+# solution 2
 
 class ExchangeFormView(FormView):
     form_class = ExchangeForm
     template_name = "home.html"
     success_url = "/"
+
+    def currencies(self):
+        return Currency.objects.all()
+
     def form_valid(self, form):
         form.calculate_rate()
+        self.get_context_data()
         return super().form_valid(form)
+
+
+# solution 3
+
+def index_view(request):
+    currencies = Currency.objects.all()
+
+    if request.method == "POST":
+        form = ExchangeForm(request.POST)
+        if form.is_valid():
+            form.calculate_rate()
+
+    if request.method == "GET":
+        form = ExchangeForm()
+
+    return render(
+        request,
+        "home.html",
+        {
+            'form': form,
+            'currencies': currencies
+        }
+    )
