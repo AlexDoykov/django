@@ -12,12 +12,10 @@ function create_post() {
 
         // handle a successful response
         success : function(json) {
-            console.log("success") // sanity check
-            console.log(json["value"])
-           /*  $('#value').val(json['value']); // remove the value from the input
+            $('#value').val(json['value']); // remove the value from the input
             $('#currency_from').val(json['currency_from'])
             $('#currency_to').val(json['currency_to'])
-            $('#converted_value').val(json['converted_value']) */
+            $('#converted_value').val(json['converted_value'])
         },
 
         // handle a non-successful response
@@ -29,10 +27,10 @@ function create_post() {
     });
 };
 
-/* $('#exchange-form').on('submit', function(event){
+$('#exchange-form').on('submit', function(event){
     event.preventDefault();
     create_post();
-}); */
+});
  
 
 

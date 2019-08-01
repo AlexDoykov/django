@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import IndexView, ExcahngeView, ExchangeFormView, index_view
+from .views import IndexView, ExchangeView, ExchangeFormView, index_view
 
 
 urlpatterns = [
-    path('', index_view),
+    path('', ExchangeFormView.as_view()),
     path(
         "exchange_currency/",
-        index_view,
+        ExchangeFormView.as_view(),
         name="exchange_currency"
         )
 ]

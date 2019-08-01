@@ -53,3 +53,7 @@ class Currency(models.Model):
                     )
         else:
             Currency.create(name, iso_code, exchange_rate)
+
+
+class NotSerializable(models.Model):
+    pass

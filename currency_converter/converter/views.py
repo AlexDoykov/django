@@ -3,6 +3,7 @@ from django.views.generic import ListView, FormView, View
 from .models import Currency
 from .forms import ExchangeForm
 from django.http import HttpResponse
+from .customJSONEncoder import CustomJSONEncoder
 # from decimal import Decimal
 import json
 
@@ -17,15 +18,23 @@ class IndexView(ListView, FormView):
     form_class = ExchangeForm
 
 
-class ExcahngeView(View):
+class ExchangeView(View):
+    template_name = "home.html"
+    success_url = "/"
+
     def post(self, request):
+        print(request.POST.get("currency_from"))
         form = ExchangeForm(request.POST)
+        response = {}
         if form.is_valid():
-            converted = form.calculate_rate()
-            response = request.POST.dict()
-            response["converted_value"] = str(converted)
+            form.calculate_rate()
+            response = form.cleaned_data
             return HttpResponse(
-                json.dumps(response),
+                json.dumps(response, cls=CustomJSONEncoder),
+                content_type="application/json"
+                )
+        return HttpResponse(
+                json.dumps(response, cls=CustomJSONEncoder),
                 content_type="application/json"
                 )
 
@@ -42,8 +51,11 @@ class ExchangeFormView(FormView):
 
     def form_valid(self, form):
         form.calculate_rate()
-        self.get_context_data()
-        return super().form_valid(form)
+        response = form.cleaned_data
+        return HttpResponse(
+                json.dumps(response, cls=CustomJSONEncoder),
+                content_type="application/json"
+                )
 
 
 # solution 3
@@ -55,7 +67,11 @@ def index_view(request):
         form = ExchangeForm(request.POST)
         if form.is_valid():
             form.calculate_rate()
-
+            response = form.cleaned_data
+            return HttpResponse(
+                json.dumps(response, cls=CustomJSONEncoder),
+                content_type="application/json"
+                )
     if request.method == "GET":
         form = ExchangeForm()
 
