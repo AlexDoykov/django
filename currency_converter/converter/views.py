@@ -32,8 +32,8 @@ class ExcahngeView(View):
 
 class ExchangeFormView(FormView):
     form_class = ExchangeForm
-
+    template_name = "home.html"
     success_url = "/"
     def form_valid(self, form):
-        print("HEREEEEE")
-        return super(ExchangeFormView, self).form_valid(form)
+        form.calculate_rate()
+        return super().form_valid(form)

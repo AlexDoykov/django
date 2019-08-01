@@ -31,4 +31,4 @@ class ExchangeForm(forms.Form):
         value = self.cleaned_data["value"]
         currency_from_converted_to_levs = currency_from_rate * value
         currency_to_converted = currency_from_converted_to_levs / currency_to_rate
-        return currency_to_converted
+        self.cleaned_data["converted_value"] = currency_to_converted
