@@ -1,18 +1,18 @@
-from json import JSONEncoder
+from django.core.serializers.json import DjangoJSONEncoder
 from decimal import Decimal
-from .models import Currency
+from django.db.models import Model
 
 
-class CustomJSONEncoder(JSONEncoder):
+class CustomJSONEncoder(DjangoJSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
-            return self.serializeDecimal(obj)
-        if isinstance(obj, Currency):
-            return self.serializeCurrency(obj)
+            return self.serialize_decimal(obj)
+        if isinstance(obj, Model):
+            return self.serialize_model(obj)
         return super().default(obj)
 
-    def serializeCurrency(self, rawCurrency):
-        return (rawCurrency.id, )
+    def serialize_model(self, instance):
+        return instance.pk
 
-    def serializeDecimal(self, rawDecimal):
-        return str(rawDecimal)
+    def serialize_decimal(self, raw_decimal):
+        return str(raw_decimal)

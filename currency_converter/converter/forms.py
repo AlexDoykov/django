@@ -25,10 +25,16 @@ class ExchangeForm(forms.Form):
     currency_to.widget.attrs.update({'id': 'currency_to'})
     converted_value.widget.attrs.update({'id': 'converted_value'})
 
-    def calculate_rate(self):
-        currency_from_rate = self.cleaned_data["currency_from"].exchange_rate
-        currency_to_rate = self.cleaned_data["currency_to"].exchange_rate
-        value = self.cleaned_data["value"]
-        currency_from_converted_to_levs = currency_from_rate * value
-        currency_to_converted = currency_from_converted_to_levs / currency_to_rate
-        self.cleaned_data["converted_value"] = currency_to_converted
+    # def clean(self):
+    #     self.cleaned_data["converted_value"] = self.clean_converted_value()
+
+    def clean_converted_value(self):
+        try:
+            from_rate = self.cleaned_data["currency_from"].exchange_rate
+            to_rate = self.cleaned_data["currency_to"].exchange_rate
+            value = self.cleaned_data["value"]
+        except KeyError:
+            pass
+        else:
+            base_value = from_rate * value
+            return base_value / to_rate
