@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from converter.models import Currency
+from converter.models import Currency, ExchangeRate
 import requests
 from bs4 import BeautifulSoup
 
@@ -16,13 +16,11 @@ class Command(BaseCommand):
         table = soup.find_all("tr")
         table = table[1:]
         table = table[:-2]
-        for element in table:
-            currency_name = element.contents[1].contents[0]
-            currency_iso_code = element.contents[3].contents[0]
-            currency_exchange_rate = element.contents[7].contents[0]
-            Currency.change_db(
-                    currency_name,
-                    currency_iso_code,
-                    currency_exchange_rate
-                    )
+        for currency in table:
+            name = currency.contents[1].contents[0]
+            iso_code = currency.contents[3].contents[0]
+            exchange_rate = currency.contents[7].contents[0]
+
+            ExchangeRate.save_to_db_once_per_day(exchange_rate, name, iso_code)
+
         self.stdout.write(self.style.SUCCESS('Successfully downloaded file'))
