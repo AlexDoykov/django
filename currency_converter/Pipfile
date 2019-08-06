@@ -12,6 +12,7 @@ django = "*"
 django-crispy-forms = "*"
 bs4 = "*"
 requests = "*"
+django-rosetta = "*"
 
 [requires]
 python_version = "3.6"

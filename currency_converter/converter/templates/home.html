@@ -7,16 +7,17 @@
 <body>
  <table style="width:100%">
   <tr>
-    <th>Валута</th>
-    <th>Код</th>
-    <th>Лева</th>
+    <th>{{ currency }}</th>
+    <th>{{ iso_code }}</th>
+    <th>{{ levs }}</th>
   </tr>
-  {% for currency in currencies%}
-  <tr>
-    <th>{{ currency.name}}</th>
-    <th>{{ currency.iso_code}}</th>
-    <th>{{ currency.exchange_rate}}</th>
-  </tr>
+  {% for currency in currencies %}
+  
+      <tr> 
+        <th><a href = "{{currency.0}}\"><p>{{ currency.1}}</p></a></th>
+        <th>{{ currency.2}}</th>
+        <th>{{ currency.3}}</th>
+      </tr>
 {% endfor %}
 </table> 
 

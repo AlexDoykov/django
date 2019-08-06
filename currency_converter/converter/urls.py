@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import IndexView, ExchangeView, ExchangeFormView, index_view
+
+from .views import ExchangeFormView, CurrencyDetailView
 
 
 urlpatterns = [
@@ -8,5 +9,14 @@ urlpatterns = [
         "exchange_currency/",
         ExchangeFormView.as_view(),
         name="exchange_currency"
-        )
+        ),
+    path(
+        "<int:pk>/",
+        CurrencyDetailView.as_view(),
+        name="currency_detail_view"
+        ),
+    # path(
+    #     "admin/update_currencies/",
+    #     update_currencies,
+    # )
 ]

@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Currency, ExchangeRate
 
 
@@ -18,15 +19,11 @@ class CurrencyAdmin(admin.ModelAdmin):
     ]
 
     def _exchange_rates(self, obj):
-        return obj.exchange_rates.all().count()
+        return obj.exchange_rates.order_by("-valid_date").first().rate
 
 
 @admin.register(ExchangeRate)
 class ExchangeRateAdmin(admin.ModelAdmin):
     list_display = ["rate", "currency", "valid_date"]
     list_filter = ("currency",)
-
-
-""" това дали изобщо ми трябва    list_select_related = (
-        "currency",
-    ) """
+    date_hierarchy = "valid_date"

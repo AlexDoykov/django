@@ -4,18 +4,18 @@ function create_post() {
         url : "exchange_currency/", // the endpoint
         type : "POST", // http method
         data : {
-            value: $('#value').val(),
+            amount: $('#amount').val(),
             currency_from: $('#currency_from').val(),
             currency_to: $('#currency_to').val(),
-            converted_value: $('#converted_value').val()
+            converted_amount: $('#converted_amount').val()
         }, // data sent with the post request
 
         // handle a successful response
         success : function(json) {
-            $('#value').val(json['value']); // remove the value from the input
+            $('#amount').val(json['amount']); // remove the value from the input
             $('#currency_from').val(json['currency_from'])
             $('#currency_to').val(json['currency_to'])
-            $('#converted_value').val(json['converted_value'])
+            $('#converted_amount').val(json['converted_amount'])
         },
 
         // handle a non-successful response

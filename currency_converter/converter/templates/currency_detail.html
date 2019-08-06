@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    {{ currency.name }}
+    {{ currency.iso_code }}
+    <ul>
+        {% for exchange_rate in currency.exchange_rates.all %}
+            <li> {{exchange_rate.rate}} </li>
+        {% endfor %}
+    </ul>
+</body>
+</html> 

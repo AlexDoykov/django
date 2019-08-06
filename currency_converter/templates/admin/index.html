@@ -1,0 +1,10 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+    {{ block.super }}
+
+    <form action="update_currencies">
+        <button type="submit">Update currencies</button>
+    </form>
+
+{% endblock %}

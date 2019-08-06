@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 class Command(BaseCommand):
     def download_file(self):
-            url = 'http://bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm'
+            url = 'https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?toLang=_EN'
             return requests.get(url, allow_redirects=True)
 
     def handle(self, *args, **kwargs):
