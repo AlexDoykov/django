@@ -1,8 +1,8 @@
-from datetime import date
+from datetime import datetime
 
 from django.utils import timezone
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 
 class Currency(models.Model):
@@ -70,21 +70,29 @@ class ExchangeRate(models.Model):
         verbose_name_plural = _('exchange rates')
 
     @staticmethod
-    def save_to_db_once_per_day(rate, currency_name, currency_iso_code):
+    def save_to_db_once_per_day(
+        rate,
+        currency_name,
+        currency_iso_code,
+        currency_date
+    ):
+        latest_date = ExchangeRate.get_latest_date()
         saved_today = ExchangeRate.objects.filter(
             currency__name=currency_name,
-            valid_date__range=(
-                date.today(),
-                date.today()
-                )
+            valid_date=latest_date
             ).exists()
         if not saved_today:
-            ExchangeRate.save_to_db(rate, currency_name, currency_iso_code)
+            ExchangeRate.save_to_db(
+                rate,
+                currency_name,
+                currency_iso_code,
+                currency_date
+                )
         else:
             print("This was already updated today.")
 
     @staticmethod
-    def save_to_db(rate, currency_name, currency_iso_code):
+    def save_to_db(rate, currency_name, currency_iso_code, currency_date):
         currency_exists = Currency.objects.filter(
             name=currency_name,
             iso_code=currency_iso_code
@@ -96,11 +104,22 @@ class ExchangeRate(models.Model):
                 currency_name,
                 currency_iso_code,
                 )
-        new_exchange_rate = ExchangeRate(rate=rate, currency=currency)
+        new_exchange_rate = ExchangeRate(
+            rate=rate,
+            currency=currency,
+            valid_date=datetime.strptime(currency_date, "%d.%m.%Y").date()
+            )
         new_exchange_rate.save()
 
     @staticmethod
     def get_latest_date():
-        return ExchangeRate.objects.order_by("-valid_date").values(
+        date_dict = ExchangeRate.objects.order_by("-valid_date").values(
             "valid_date"
-            ).first()["valid_date"]
+            ).first()
+
+        # maybe something better here
+
+        if date_dict is None:
+            return None
+        else:
+            return date_dict["valid_date"]

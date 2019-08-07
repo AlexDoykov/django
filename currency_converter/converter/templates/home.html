@@ -1,15 +1,16 @@
  <!DOCTYPE html>
  {% load crispy_forms_tags %}
+ {% load i18n %}
 <html>
 <head>
-<title>Page Title</title>
+<title>{% trans "Currency Converter" %}</title>
 </head>
 <body>
  <table style="width:100%">
   <tr>
-    <th>{{ currency }}</th>
-    <th>{{ iso_code }}</th>
-    <th>{{ levs }}</th>
+    <th>{% trans "currency" %}</th>
+    <th>{% trans "iso code" %}</th>
+    <th>{% trans "levs" %}</th>
   </tr>
   {% for currency in currencies %}
   

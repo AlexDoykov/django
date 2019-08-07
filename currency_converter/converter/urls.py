@@ -6,17 +6,13 @@ from .views import ExchangeFormView, CurrencyDetailView
 urlpatterns = [
     path('', ExchangeFormView.as_view()),
     path(
-        "exchange_currency/",
+        'exchange_currency/',
         ExchangeFormView.as_view(),
-        name="exchange_currency"
+        name='exchange_currency'
         ),
     path(
-        "<int:pk>/",
+        '<int:pk>/',
         CurrencyDetailView.as_view(),
-        name="currency_detail_view"
-        ),
-    # path(
-    #     "admin/update_currencies/",
-    #     update_currencies,
-    # )
+        name='currency_detail_view'
+        )
 ]

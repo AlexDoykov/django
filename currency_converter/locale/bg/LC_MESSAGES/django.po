@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-06 14:32+0300\n"
+"POT-Creation-Date: 2019-08-07 11:49+0300\n"
 "PO-Revision-Date: 2019-08-06 11:34+0000\n"
 "Last-Translator: b'  <root@root.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,13 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.3\n"
 
+#: converter/apps.py:6 converter/apps.py:7 converter/apps.py:8
+msgid "converter"
+msgstr "обръщач"
+
 #: converter/forms.py:12
-#| msgid "currency"
 msgid "currency from"
 msgstr "валута от"
 
 #: converter/forms.py:16
-#| msgid "currency"
 msgid "currency to"
 msgstr "валута в"
 
@@ -72,3 +74,15 @@ msgstr "курсове за обмяна"
 #: converter/views.py:59
 msgid "levs"
 msgstr "лева"
+
+#: currency_converter/settings.py:115
+msgid "English"
+msgstr ""
+
+#: currency_converter/settings.py:116
+msgid "Bulgarian"
+msgstr ""
+
+#: templates/admin/change_list.html:6
+msgid "Get exchange rates for today"
+msgstr "Изтегли днешните валутни курсове"

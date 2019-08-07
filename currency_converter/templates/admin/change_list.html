@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block content %}
+        <form action="update_exchange_rates/">
+            <button type="submit">{% trans "Get exchange rates for today" %}</button>
+        </form>
+    {{ block.super }}
+{% endblock %}

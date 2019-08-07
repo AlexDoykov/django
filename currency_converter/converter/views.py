@@ -4,7 +4,6 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView, FormView, View, DetailView
-from django.utils.translation import gettext_lazy as _
 
 from .models import Currency, ExchangeRate
 from .forms import ExchangeForm
@@ -54,9 +53,6 @@ class ExchangeFormView(FormView):
         if latest_date is None:
             return super().get_context_data(**kwargs)
         kwargs['currencies'] = Currency.get_currencies_by_date(latest_date)
-        kwargs['currency'] = _("currency")
-        kwargs['iso_code'] = _("iso code")
-        kwargs['levs'] = _("levs")
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
