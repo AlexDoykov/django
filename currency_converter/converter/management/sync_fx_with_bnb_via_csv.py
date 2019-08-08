@@ -1,5 +1,6 @@
 import requests
 import csv
+import os
 from datetime import datetime
 
 from converter.models import ExchangeRate, Currency
@@ -30,3 +31,4 @@ def sync_fx_with_bnb_via_csv(url):
                 currency=currency[0],
                 valid_date=datetime.strptime(date, "%d.%m.%Y").date()
                 )
+    os.remove("exchange_rates.csv")
