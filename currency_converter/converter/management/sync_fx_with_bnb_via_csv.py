@@ -26,7 +26,7 @@ def sync_fx_with_bnb_via_csv(url):
                 name=name,
                 iso_code=iso_code
                 )
-            ExchangeRate.objects.create(
+            ExchangeRate.objects.get_or_create(
                 rate=exchange_rate,
                 currency=currency[0],
                 valid_date=datetime.strptime(date, "%d.%m.%Y").date()
