@@ -66,3 +66,9 @@ class ExchangeRate(models.Model):
     class Meta:
         verbose_name = _('exchange rate')
         verbose_name_plural = _('exchange rates')
+        constraints = [
+            models.UniqueConstraint(
+                fields=['valid_date', 'currency'],
+                name='unique_fx_for_the_day'
+            )
+        ]
