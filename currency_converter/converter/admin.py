@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import path
 
 from .models import Currency, ExchangeRate
+from .management.sync_fx_with_bnb_via_csv import sync_fx_with_bnb_via_csv
 
 
 class ExchangeRateInline(admin.TabularInline):
@@ -46,10 +47,12 @@ class ExchangeRateAdmin(admin.ModelAdmin):
         return my_urls + urls
 
     def update_exchange_rates(self, request):
-        subprocess.run([
-            'python',
-            'manage.py',
-            'sync_via_csv',
-            'https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=csv&search=&lang=BG'
-            ])
+        sync_fx_with_bnb_via_csv('https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=csv&search=&lang=BG')
+
+        # subprocess.run([
+        #     'python',
+        #     'manage.py',
+        #     'sync_via_csv',
+        #     'https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=csv&search=&lang=BG'
+        #     ])
         return HttpResponseRedirect('../')
