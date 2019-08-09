@@ -18,30 +18,6 @@ class Currency(models.Model):
     def __str__(self):
         return self.name + ' ' + self.iso_code
 
-    @staticmethod
-    def add_currency(name, iso_code):
-        new_currency = Currency(
-                name=name,
-                iso_code=iso_code,
-                )
-        new_currency.save()
-        return new_currency
-
-    @staticmethod
-    def get_currency_with_rates(id):
-        return Currency.objects.select_related().get(id=id)
-
-    @staticmethod
-    def get_currencies_by_date(date):
-        return Currency.objects.filter(
-            exchange_rates__valid_date=date
-            ).values_list(
-            'id',
-            'name',
-            'iso_code',
-            'exchange_rates__rate'
-            )
-
     def get_latest_rate(self):
         return self.exchange_rates.order_by('-valid_date').first().rate
 
