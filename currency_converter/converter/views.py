@@ -13,19 +13,19 @@ from .customJSONEncoder import CustomJSONEncoder
 # solution one
 
 class IndexView(ListView, FormView):
-    template_name = "home.html"
+    template_name = 'home.html'
     model = Currency
-    context_object_name = "currencies"
+    context_object_name = 'currencies'
 
     form_class = ExchangeForm
 
 
 class ExchangeView(View):
-    template_name = "home.html"
-    success_url = "/"
+    template_name = 'home.html'
+    success_url = '/'
 
     def post(self, request):
-        print(request.POST.get("currency_from"))
+        print(request.POST.get('currency_from'))
         form = ExchangeForm(request.POST)
         response = {}
         if form.is_valid():
@@ -33,11 +33,11 @@ class ExchangeView(View):
             response = form.cleaned_data
             return HttpResponse(
                 json.dumps(response, cls=CustomJSONEncoder),
-                content_type="application/json"
+                content_type='application/json'
                 )
         return HttpResponse(
                 json.dumps(response, cls=CustomJSONEncoder),
-                content_type="application/json"
+                content_type='application/json'
                 )
 
 
@@ -45,8 +45,8 @@ class ExchangeView(View):
 
 class ExchangeFormView(FormView):
     form_class = ExchangeForm
-    template_name = "home.html"
-    success_url = "/"
+    template_name = 'home.html'
+    success_url = '/'
 
     def get_context_data(self, **kwargs):
         latest_date = ExchangeRate.objects.order_by(
@@ -57,6 +57,7 @@ class ExchangeFormView(FormView):
         kwargs['currencies'] = Currency.objects.filter(
             exchange_rates__valid_date=latest_date.get('valid_date')
             ).values_list('id', 'name', 'iso_code', 'exchange_rates__rate')
+        print(kwargs['currencies'])
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
@@ -69,18 +70,18 @@ def index_view(request):
     currencies = Currency.objects.all()
     form = ExchangeForm(request.POST if request.method == 'POST' else None)
 
-    if request.method == "POST":
+    if request.method == 'POST':
         # form = ExchangeForm(request.POST)
         if form.is_valid():
             # form.calculate_rate()
             response = form.cleaned_data
             return JsonResponse(response, encoder=CustomJSONEncoder)
-    # if request.method == "GET":
+    # if request.method == 'GET':
     #     form = ExchangeForm()
 
     return render(
         request,
-        "home.html",
+        'home.html',
         {
             'form': form,
             'currencies': currencies
@@ -90,4 +91,4 @@ def index_view(request):
 
 class CurrencyDetailView(DetailView):
     model = Currency
-    template_name = "currency_detail.html"
+    template_name = 'currency_detail.html'

@@ -34,7 +34,7 @@ class ExchangeRate(models.Model):
         related_name='exchange_rates',
         verbose_name=_('currency')
         )
-    valid_date = models.DateField(
+    valid_date = models.DateTimeField(
         default=timezone.now,
         verbose_name=_('valid date')
         )
