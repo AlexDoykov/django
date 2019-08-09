@@ -1,5 +1,3 @@
-import subprocess
-
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.urls import path
@@ -26,8 +24,6 @@ class CurrencyAdmin(admin.ModelAdmin):
     def _exchange_rate(self, obj):
         return obj.exchange_rates.order_by('-valid_date').first().rate
 
-    # _exchange_rate.empty_value_display = 'unknown'
-
 
 @admin.register(ExchangeRate)
 class ExchangeRateAdmin(admin.ModelAdmin):
@@ -48,11 +44,4 @@ class ExchangeRateAdmin(admin.ModelAdmin):
 
     def update_exchange_rates(self, request):
         sync_fx_with_bnb_via_csv('https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=csv&search=&lang=BG')
-
-        # subprocess.run([
-        #     'python',
-        #     'manage.py',
-        #     'sync_via_csv',
-        #     'https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=csv&search=&lang=BG'
-        #     ])
         return HttpResponseRedirect('../')
