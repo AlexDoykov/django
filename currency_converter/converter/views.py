@@ -49,14 +49,12 @@ class ExchangeFormView(FormView):
     success_url = '/'
 
     def get_context_data(self, **kwargs):
-        latest_date = ExchangeRate.objects.order_by(
-            '-valid_date'
-            ).values('valid_date').first()
+        latest_date = ExchangeRate.rates.get_latest_date()
         if latest_date is None:
             return super().get_context_data(**kwargs)
-        kwargs['currencies'] = Currency.objects.filter(
-            exchange_rates__valid_date=latest_date.get('valid_date')
-            ).values_list('id', 'name', 'iso_code', 'exchange_rates__rate')
+        kwargs['currencies'] = Currency.currencies.get_currencies_by_date(
+            latest_date
+            )
         print(kwargs['currencies'])
         return super().get_context_data(**kwargs)
 

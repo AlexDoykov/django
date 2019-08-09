@@ -3,6 +3,13 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
+class CurrencyManager(models.Manager):
+    def get_currencies_by_date(self, date):
+        return self.get_queryset().filter(
+            exchange_rates__valid_date=date
+            ).values_list('id', 'name', 'iso_code', 'exchange_rates__rate')
+
+
 class Currency(models.Model):
     name = models.CharField(max_length=20, unique=True, verbose_name=_('name'))
     iso_code = models.CharField(
@@ -10,6 +17,8 @@ class Currency(models.Model):
         unique=True,
         verbose_name=_('iso code')
         )
+    objects = models.Manager()
+    currencies = CurrencyManager()
 
     class Meta:
         verbose_name = _('currency')
@@ -20,6 +29,17 @@ class Currency(models.Model):
 
     def get_latest_rate(self):
         return self.exchange_rates.order_by('-valid_date').first().rate
+
+
+class ExchangeRateManager(models.Manager):
+    def get_latest_date(self):
+        latest_date = self.get_query_set().order_by(
+            '-valid_date'
+            ).values('valid_date').first()
+        if latest_date is None:
+            return latest_date
+        else:
+            return latest_date.get('valid_date')
 
 
 class ExchangeRate(models.Model):
@@ -38,6 +58,9 @@ class ExchangeRate(models.Model):
         default=timezone.now,
         verbose_name=_('valid date')
         )
+
+    objects = models.Manager()
+    rates = ExchangeRateManager()
 
     class Meta:
         verbose_name = _('exchange rate')
