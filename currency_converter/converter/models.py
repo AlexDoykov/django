@@ -33,7 +33,7 @@ class Currency(models.Model):
 
 class ExchangeRateManager(models.Manager):
     def get_latest_date(self):
-        latest_date = self.get_query_set().order_by(
+        latest_date = self.get_queryset().order_by(
             '-valid_date'
             ).values('valid_date').first()
         if latest_date is None:
