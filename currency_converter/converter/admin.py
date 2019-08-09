@@ -43,5 +43,8 @@ class ExchangeRateAdmin(admin.ModelAdmin):
         return my_urls + urls
 
     def update_exchange_rates(self, request):
-        sync_fx_with_bnb_via_csv('https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=csv&search=&lang=BG')
+        # if request.user.is_superuser:
+        # if request.user.has_perm('converter.update_exchange_rates'):
+        if self.has_view_permission(request, ExchangeRate):
+            sync_fx_with_bnb_via_csv('https://www.bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=csv&search=&lang=BG')
         return HttpResponseRedirect('../')

@@ -65,7 +65,6 @@ class ExchangeFormView(FormView):
 
 
 # solution 3
-
 def index_view(request):
     currencies = Currency.objects.all()
     form = ExchangeForm(request.POST if request.method == 'POST' else None)

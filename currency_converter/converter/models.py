@@ -48,3 +48,6 @@ class ExchangeRate(models.Model):
                 name='unique_fx_for_the_day'
             )
         ]
+        permissions = [
+            ('update_exchange_rates', 'user can update exchange rates')
+        ]
