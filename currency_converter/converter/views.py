@@ -49,10 +49,10 @@ class ExchangeFormView(FormView):
     success_url = '/'
 
     def get_context_data(self, **kwargs):
-        latest_date = ExchangeRate.rates.get_latest_date()
+        latest_date = ExchangeRate.objects.get_latest_date()
         if latest_date is None:
             return super().get_context_data(**kwargs)
-        kwargs['currencies'] = Currency.currencies.get_currencies_by_date(
+        kwargs['currencies'] = Currency.objects.get_currencies_by_date(
             latest_date
             )
         print(kwargs['currencies'])

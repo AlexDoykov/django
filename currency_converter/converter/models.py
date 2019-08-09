@@ -17,8 +17,7 @@ class Currency(models.Model):
         unique=True,
         verbose_name=_('iso code')
         )
-    objects = models.Manager()
-    currencies = CurrencyManager()
+    objects = CurrencyManager()
 
     class Meta:
         verbose_name = _('currency')
@@ -59,8 +58,7 @@ class ExchangeRate(models.Model):
         verbose_name=_('valid date')
         )
 
-    objects = models.Manager()
-    rates = ExchangeRateManager()
+    objects = ExchangeRateManager()
 
     class Meta:
         verbose_name = _('exchange rate')
