@@ -5,5 +5,5 @@ setup(
     version="2.0",
     author_email="doykov70@gmail.com",
     description="well a currency converter",
-    packages = ["currency_converter",]
+    packages = ["currency_converter/converter",]
 )
