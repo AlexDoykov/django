@@ -6,13 +6,17 @@ verify_ssl = true
 [dev-packages]
 flake8 = "*"
 django-debug-toolbar = "*"
+pylint = "*"
 
 [packages]
-django = "*"
+django = "==2.1"
 django-crispy-forms = "*"
 bs4 = "*"
 requests = "*"
 django-rosetta = "*"
+debug-tools = "*"
+django-debug-toolbar = "*"
+pipfile = "*"
 
 [requires]
 python_version = "3.6"

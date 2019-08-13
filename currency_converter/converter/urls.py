@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import ExchangeFormView, CurrencyDetailView
 
-
+app_name = 'converter'
 urlpatterns = [
     path('', ExchangeFormView.as_view()),
     path(

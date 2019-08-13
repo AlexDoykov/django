@@ -21,7 +21,7 @@ class IndexView(ListView, FormView):
 
 
 class ExchangeView(View):
-    template_name = 'home.html'
+    template_name = 'converter/home.html'
     success_url = '/'
 
     def post(self, request):
@@ -45,7 +45,7 @@ class ExchangeView(View):
 
 class ExchangeFormView(FormView):
     form_class = ExchangeForm
-    template_name = 'home.html'
+    template_name = 'converter/home.html'
     success_url = '/'
 
     def get_context_data(self, **kwargs):
@@ -89,4 +89,4 @@ def index_view(request):
 
 class CurrencyDetailView(DetailView):
     model = Currency
-    template_name = 'currency_detail.html'
+    template_name = 'converter/currency_detail.html'

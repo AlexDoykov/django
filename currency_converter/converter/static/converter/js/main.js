@@ -12,6 +12,7 @@ function create_post() {
 
         // handle a successful response
         success : function(json) {
+            console.log(json)
             $('#amount').val(json['amount']); // remove the value from the input
             $('#currency_from').val(json['currency_from'])
             $('#currency_to').val(json['currency_to'])
