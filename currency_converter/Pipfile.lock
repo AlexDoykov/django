@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "cacc27301152b01fffd12b801efd6cfd96e00cf53adcb4993d5a9fddbe22aa21"
+            "sha256": "cb3ca35f83bfede3dcaab251a381b6672f696ead8fb1831042f909e6e60e3483"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -60,6 +60,20 @@
             "index": "pypi",
             "version": "==2.1.11"
         },
+        "django-classy-tags": {
+            "hashes": [
+                "sha256:38b4546a8053499e2fef7af679a58d7c868298717d645b8b8227acba5fd4bf2b"
+            ],
+            "version": "==0.9.0"
+        },
+        "django-cms": {
+            "hashes": [
+                "sha256:873a87cf5aa8b01050b31cda59998f88033f37ecaf1c3778feb1f916670f3aa0",
+                "sha256:9c8fa13d9948b73f1d046a00454922af8d8c52c8d17b88de5466d14fcd9e304a"
+            ],
+            "index": "pypi",
+            "version": "==3.6.0"
+        },
         "django-crispy-forms": {
             "hashes": [
                 "sha256:5952bab971110d0b86c278132dae0aa095beee8f723e625c3d3fa28888f1675f",
@@ -76,12 +90,37 @@
             "index": "pypi",
             "version": "==2.0"
         },
+        "django-formtools": {
+            "hashes": [
+                "sha256:7703793f1675aa6e871f9fed147e8563816d7a5b9affdc5e3459899596217f7c",
+                "sha256:cb2bd7c29c2104278e5a0e76f7ff256b9570acf11485d547ee0c1b35347359fb"
+            ],
+            "version": "==2.1"
+        },
         "django-rosetta": {
             "hashes": [
                 "sha256:bbfb9519fd5dc7c53fade5d51651dd13f5acb9545df791782cd3bb09db009ac6"
             ],
             "index": "pypi",
             "version": "==0.9.3"
+        },
+        "django-sekizai": {
+            "hashes": [
+                "sha256:642a3356fe92fe9b5ccc97f320b64edd2cfcb3b2fbb113e8a26dad9a1f3b5e14"
+            ],
+            "version": "==1.0.0"
+        },
+        "django-treebeard": {
+            "hashes": [
+                "sha256:c21db06a8d4943bf2a28d9d7a119058698fb76116df2679ecbf15a46a501de42"
+            ],
+            "version": "==4.3"
+        },
+        "djangocms-admin-style": {
+            "hashes": [
+                "sha256:0ff3f45ed56e98c92fcabf219377f4165ab20a4cb2d018c1da461b6b85179177"
+            ],
+            "version": "==1.4.0"
         },
         "idna": {
             "hashes": [

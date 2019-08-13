@@ -17,6 +17,7 @@ django-rosetta = "*"
 debug-tools = "*"
 django-debug-toolbar = "*"
 pipfile = "*"
+django-cms = "*"
 
 [requires]
 python_version = "3.6"
