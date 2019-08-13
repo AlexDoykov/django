@@ -9,7 +9,7 @@ django-debug-toolbar = "*"
 pylint = "*"
 
 [packages]
-django = "==2.1"
+django = "==2.1.11"
 django-crispy-forms = "*"
 bs4 = "*"
 requests = "*"
