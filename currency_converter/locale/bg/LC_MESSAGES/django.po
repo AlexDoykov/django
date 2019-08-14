@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-07 11:49+0300\n"
-"PO-Revision-Date: 2019-08-06 11:34+0000\n"
-"Last-Translator: b'  <root@root.com>'\n"
+"POT-Creation-Date: 2019-08-14 12:07+0300\n"
+"PO-Revision-Date: 2019-08-14 08:17+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,8 +19,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.3\n"
 
-#: converter/apps.py:6 converter/apps.py:7 converter/apps.py:8
+#: converter/admin.py:30
+msgid "Exchange rate"
+msgstr "курс за обмяна"
+
+#: converter/apps.py:7
 msgid "converter"
+msgstr "обръщач"
+
+#: converter/cms_apps.py:8
+msgid "Converter Apphook"
 msgstr "обръщач"
 
 #: converter/forms.py:12
@@ -39,49 +47,62 @@ msgstr "сума"
 msgid "converted amount"
 msgstr "резултат"
 
-#: converter/models.py:9
+#: converter/models.py:14
 msgid "name"
 msgstr "име"
 
-#: converter/models.py:13 converter/views.py:58
+#: converter/models.py:18 converter/templates/converter/home.html:13
 msgid "iso code"
 msgstr "код"
 
-#: converter/models.py:17 converter/models.py:61 converter/views.py:57
+#: converter/models.py:20
+msgid "slug"
+msgstr "заготовка"
+
+#: converter/models.py:25 converter/models.py:56
+#: converter/templates/converter/home.html:12
 msgid "currency"
 msgstr "валута"
 
-#: converter/models.py:18
+#: converter/models.py:26
 msgid "currencies"
 msgstr "валути"
 
-#: converter/models.py:55
+#: converter/models.py:50
 msgid "rate"
 msgstr "курс"
 
-#: converter/models.py:65
+#: converter/models.py:60
 msgid "valid date"
 msgstr "дата на валидност"
 
-#: converter/models.py:69
+#: converter/models.py:66
 msgid "exchange rate"
 msgstr "курс за обмяна"
 
-#: converter/models.py:70
+#: converter/models.py:67
 msgid "exchange rates"
 msgstr "курсове за обмяна"
 
-#: converter/views.py:59
+#: converter/templates/converter/home.html:7
+msgid "Currency Converter"
+msgstr "обръщач на валути"
+
+#: converter/templates/converter/home.html:14
 msgid "levs"
 msgstr "лева"
 
-#: currency_converter/settings.py:115
-msgid "English"
-msgstr ""
+#: converter/templates/converter/home.html:32
+msgid "Submit"
+msgstr "конвертирай"
 
-#: currency_converter/settings.py:116
+#: currency_converter/settings.py:165
+msgid "English"
+msgstr "Английски"
+
+#: currency_converter/settings.py:166
 msgid "Bulgarian"
-msgstr ""
+msgstr "Български"
 
 #: templates/admin/change_list.html:6
 msgid "Get exchange rates for today"

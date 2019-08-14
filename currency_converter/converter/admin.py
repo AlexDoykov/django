@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.urls import path
+from django.utils.translation import ugettext_lazy as _
 
-from .models import Currency, ExchangeRate
 from .management.sync_fx_with_bnb_via_csv import sync_fx_with_bnb_via_csv
+from .models import Currency, ExchangeRate
 
 
 class ExchangeRateInline(admin.TabularInline):
@@ -26,6 +27,8 @@ class CurrencyAdmin(admin.ModelAdmin):
         if exchange_rate is None:
             return exchange_rate
         return exchange_rate.rate
+    _exchange_rate.short_description = _("Exchange rate")
+
 
 
 @admin.register(ExchangeRate)

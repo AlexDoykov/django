@@ -1,5 +1,5 @@
-from django.utils import timezone
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -17,7 +17,7 @@ class Currency(models.Model):
         unique=True,
         verbose_name=_('iso code')
         )
-    slug = models.SlugField(allow_unicode=True, unique=True)
+    slug = models.SlugField(allow_unicode=True, unique=True, verbose_name=_('slug'))
 
     objects = CurrencyManager()
 
