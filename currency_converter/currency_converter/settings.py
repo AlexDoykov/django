@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    
     'converter.apps.ConverterConfig',
+
     'crispy_forms',
     'debug_toolbar',
     'rosetta',

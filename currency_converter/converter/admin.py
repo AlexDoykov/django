@@ -22,7 +22,10 @@ class CurrencyAdmin(admin.ModelAdmin):
     ]
 
     def _exchange_rate(self, obj):
-        return obj.exchange_rates.order_by('-valid_date').first().rate
+        exchange_rate = obj.exchange_rates.order_by('-valid_date').first()
+        if exchange_rate is None:
+            return exchange_rate
+        return exchange_rate.rate
 
 
 @admin.register(ExchangeRate)
