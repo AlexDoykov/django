@@ -3,6 +3,8 @@ import csv
 import os
 from datetime import datetime
 
+from django.utils.text import slugify
+
 from converter.models import ExchangeRate, Currency
 
 
@@ -24,7 +26,8 @@ def sync_fx_with_bnb_via_csv(url):
             exchange_rate = exchange_rate[4]
             currency = Currency.objects.get_or_create(
                 name=name,
-                iso_code=iso_code
+                iso_code=iso_code,
+                slug=slugify(name, allow_unicode=True),
                 )
             ExchangeRate.objects.get_or_create(
                 rate=exchange_rate,

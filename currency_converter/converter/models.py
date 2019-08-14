@@ -7,7 +7,7 @@ class CurrencyManager(models.Manager):
     def get_currencies_by_date(self, date):
         return self.get_queryset().filter(
             exchange_rates__valid_date=date
-            ).values_list('id', 'name', 'iso_code', 'exchange_rates__rate')
+            ).values_list('id', 'name', 'iso_code', 'exchange_rates__rate', 'slug')
 
 
 class Currency(models.Model):
@@ -17,6 +17,8 @@ class Currency(models.Model):
         unique=True,
         verbose_name=_('iso code')
         )
+    slug = models.SlugField(allow_unicode=True, unique=True)
+
     objects = CurrencyManager()
 
     class Meta:

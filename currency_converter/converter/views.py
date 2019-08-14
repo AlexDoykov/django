@@ -25,7 +25,6 @@ class ExchangeView(View):
     success_url = '/'
 
     def post(self, request):
-        print(request.POST.get('currency_from'))
         form = ExchangeForm(request.POST)
         response = {}
         if form.is_valid():
@@ -55,7 +54,6 @@ class ExchangeFormView(FormView):
         kwargs['currencies'] = Currency.objects.get_currencies_by_date(
             latest_date
             )
-        print(kwargs['currencies'])
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):

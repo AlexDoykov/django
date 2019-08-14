@@ -16,7 +16,7 @@
   {% for currency in currencies %}
   
       <tr> 
-        <th><a href = "{% url 'converter:currency_detail_view' currency.0 %}"><p>{{ currency.1}}</p></a></th>
+        <th><a href = "{% url 'converter:currency_detail_view' currency.4 %}"><p>{{ currency.1}}</p></a></th>
         <th>{{ currency.2}}</th>
         <th>{{ currency.3}}</th>
       </tr>

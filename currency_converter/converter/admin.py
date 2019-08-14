@@ -13,7 +13,7 @@ class ExchangeRateInline(admin.TabularInline):
 
 @admin.register(Currency)
 class CurrencyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'iso_code', '_exchange_rate']
+    list_display = ['id', 'name', 'iso_code', '_exchange_rate', 'slug']
     list_filter = ('name',)
     fields = [('iso_code', 'name')]
 

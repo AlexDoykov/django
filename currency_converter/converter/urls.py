@@ -11,7 +11,7 @@ urlpatterns = [
         name='exchange_currency'
         ),
     path(
-        '<int:pk>/',
+        '<str:slug>/',
         CurrencyDetailView.as_view(),
         name='currency_detail_view'
         )
